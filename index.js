@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connectDB from './utils/db.js';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/user.route.js';
+import kycRoutes from './routes/KYC.route.js';
 
 dotenv.config();
 const app = express();
@@ -18,11 +19,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-
 const PORT = process.env.PORT || 5000;
 
 // API routes
 app.use('/api/user', userRoutes);
+app.use('/api/kyc', kycRoutes);
 
 app.listen(5000, () => {
     connectDB();

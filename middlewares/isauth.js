@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         req.user = decoded;
+        
         if (!decoded) return res.status(401).json({ message: 'Unauthorized', success: false });
         next();
     } catch (error) {

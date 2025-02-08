@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { string } from "zod";
 
 const userSchema = new mongoose.Schema({
     title:{
@@ -16,12 +17,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    code:{
-        type: Number,
+    countryCode:{
+        type: String,
         required: true
     },
     mobileNumber: {
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },
@@ -29,18 +30,33 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    referralcode:{
-        type: String,
-        },
-    termsAccepted: { 
-        type: Boolean, 
-        //required: true 
-    },
-    randomCode: {
+    clientId: {
         type: String,
     },
-
-   
+    accountVerified: {
+        type: Boolean,
+        default: false
+    },
+    verificationCode: {
+        type: Number,
+    },
+    verificationCodeExpires: {
+        type: Date,
+    },
+    resetPasswordToken: {
+        type: String,
+    },
+    resetPasswordExpires: {
+        type: Date,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },  
+    termsAccepted: {
+        type: Boolean,
+        required: true
+    } 
 });
 
 export const User = mongoose.model("User", userSchema);
